@@ -12,6 +12,7 @@ from typing import Any, Sequence
 import httpx
 from mcp.server import Server
 from mcp.server.models import InitializationOptions
+from mcp.types import ServerCapabilities, ResourcesCapability, ToolsCapability
 from mcp.server.stdio import stdio_server
 from mcp.types import (
     Resource,
@@ -207,10 +208,10 @@ class WeatherServer:
                 InitializationOptions(
                     server_name="weather-server",
                     server_version="1.0.0",
-                    capabilities=self.server.get_capabilities(
-                        notification_options=None,
-                        experimental_capabilities=None,
-                    ),
+                    capabilities=ServerCapabilities(
+                        resources=ResourcesCapability(subscribe=False, listChanged=False),
+                        tools=ToolsCapability(listChanged=False)
+                    )
                 ),
             )
 
